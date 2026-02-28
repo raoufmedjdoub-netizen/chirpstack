@@ -109,5 +109,5 @@
   enabled = ["mqtt"]
 
   [integration.mqtt]
-    server = "tcp://localhost:1883/"
+    server = "tcp://mosquitto:1883/"
     json = true
