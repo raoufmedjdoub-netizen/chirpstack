@@ -1,5 +1,6 @@
 version: "3.8"
 
+services:
   chirpstack:
     image: chirpstack/chirpstack:4
     depends_on:
@@ -14,7 +15,7 @@ version: "3.8"
       - "--config"
       - "/etc/chirpstack"
     restart: unless-stopped
-    
+
   gateway-bridge:
     image: chirpstack/chirpstack-gateway-bridge:4
     depends_on:
@@ -27,7 +28,7 @@ version: "3.8"
       - "--config"
       - "/etc/chirpstack-gateway-bridge/chirpstack-gateway-bridge.toml"
     restart: unless-stopped
-    
+
   postgres:
     image: postgres:15-alpine
     environment:
