@@ -31,7 +31,7 @@ services:
     image: postgres:15-alpine
     environment:
       POSTGRES_USER: chirpstack
-      POSTGRES_PASSWORD: #9y7m[6{XZvp6V
+      POSTGRES_PASSWORD: change_me_strong
       POSTGRES_DB: chirpstack
     volumes:
       - "postgresdata:/var/lib/postgresql/data"
