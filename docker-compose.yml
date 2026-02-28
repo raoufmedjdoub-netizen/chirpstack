@@ -10,12 +10,12 @@ services:
     ports:
       - "8080:8080"
     volumes:
-      - "./chirpstack:/etc/chirpstack"
+      - "./chirpstack/chirpstack.toml:/etc/chirpstack/chirpstack.toml:ro"
     command:
       - "--config"
       - "/etc/chirpstack/chirpstack.toml"
     restart: unless-stopped
-
+    
   gateway-bridge:
     image: chirpstack/chirpstack-gateway-bridge:4
     depends_on:
