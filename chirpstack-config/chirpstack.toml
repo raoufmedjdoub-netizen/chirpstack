@@ -4,7 +4,7 @@
 level = "info"
 
 [postgresql]
-dsn = "postgres://chirpstack:#9y7m[6{XZvp6V@postgres/chirpstack?sslmode=disable"
+dsn = "postgres://chirpstack:change_me_strong@postgres/chirpstack?sslmode=disable"
 
 [redis]
 servers = ["redis://redis:6379/"]
