@@ -23,12 +23,12 @@ services:
     ports:
       - "1700:1700/udp"
     volumes:
-      - "./chirpstack-gateway-bridge:/etc/chirpstack-gateway-bridge"
+      - "./chirpstack-gateway-bridge/chirpstack-gateway-bridge.toml:/etc/chirpstack-gateway-bridge/chirpstack-gateway-bridge.toml:ro"
     command:
       - "--config"
       - "/etc/chirpstack-gateway-bridge/chirpstack-gateway-bridge.toml"
     restart: unless-stopped
-
+    
   postgres:
     image: postgres:15-alpine
     environment:
