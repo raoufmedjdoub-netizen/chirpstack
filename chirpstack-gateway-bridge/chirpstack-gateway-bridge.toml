@@ -15,7 +15,7 @@ marshaler="json"
 [integration.mqtt]
 server="tcp://mosquitto:1883"
 
-environment:
+[environment]
 INTEGRATION__MQTT__SERVER="tcp://mosquitto:1883"
 
 event_topic_template="eu868/gateway/{{ .GatewayID }}/event/{{ .EventType }}"
