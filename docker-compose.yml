@@ -1,42 +1,54 @@
+version: "3.8"
+
 services:
   chirpstack:
-    build:
-      context: .
-      dockerfile: Dockerfile-devel
-    volumes:
-      - ./:/chirpstack
+    image: chirpstack/chirpstack:4
     depends_on:
       - postgres
       - redis
       - mosquitto
-    environment:
-      - DATABASE_URL=postgres://chirpstack_test:chirpstack_test@postgres/chirpstack_test?sslmode=disable
-      - REDIS_HOST=redis
-      - POSTGRESQL_HOST=postgres
-      - MQTT_BROKER_HOST=mosquitto
-      - TEST_POSTGRESQL_DSN=postgres://chirpstack_test:chirpstack_test@postgres/chirpstack_test?sslmode=disable
-      - TEST_REDIS_URL=redis://redis/1
-      - TEST_MOSQUITTO_SERVER=tcp://mosquitto:1883/
     ports:
       - "8080:8080"
+    volumes:
+      - ./chirpstack:/etc/chirpstack
+    restart: unless-stopped
+
+  gateway-bridge:
+    image: chirpstack/chirpstack-gateway-bridge:4
+    depends_on:
+      - mosquitto
+    ports:
+      - "1700:1700/udp"
+    volumes:
+      - ./chirpstack-gateway-bridge:/etc/chirpstack-gateway-bridge
+    restart: unless-stopped
 
   postgres:
-    image: postgres:18-alpine
-    volumes:
-      - ./.docker-compose/postgresql/initdb:/docker-entrypoint-initdb.d
+    image: postgres:15-alpine
     environment:
-      - POSTGRES_HOST_AUTH_METHOD=trust
-    ports:
-      - "5432:5432"
+      POSTGRES_USER: chirpstack
+      POSTGRES_PASSWORD: change_me_strong
+      POSTGRES_DB: chirpstack
+    volumes:
+      - postgresdata:/var/lib/postgresql/data
+      - ./.docker-compose/postgresql/initdb:/docker-entrypoint-initdb.d
+    restart: unless-stopped
 
   redis:
-    image: redis:8-alpine
-    ports:
-      - "6379:6379"
+    image: redis:7-alpine
+    restart: unless-stopped
 
   mosquitto:
-    volumes:
-      - ./.docker-compose/mosquitto/config/:/mosquitto/config/
     image: eclipse-mosquitto:2
     ports:
       - "1883:1883"
+    volumes:
+      - ./.docker-compose/mosquitto/config:/mosquitto/config
+      - mosquitto_data:/mosquitto/data
+      - mosquitto_log:/mosquitto/log
+    restart: unless-stopped
+
+volumes:
+  postgresdata:
+  mosquitto_data:
+  mosquitto_log:
