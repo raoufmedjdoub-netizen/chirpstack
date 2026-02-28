@@ -10,10 +10,8 @@ services:
     ports:
       - "8080:8080"
     volumes:
-      - "./chirpstack:/etc/chirpstack"
-    command:
-      - "--config"
-      - "/etc/chirpstack"
+      - ./chirpstack-config:/etc/chirpstack
+    command: ["--config","/etc/chirpstack"]
     restart: unless-stopped
 
   gateway-bridge:
