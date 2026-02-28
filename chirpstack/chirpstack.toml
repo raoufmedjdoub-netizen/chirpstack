@@ -1,3 +1,5 @@
+# chirpstack/chirpstack.toml
+
 [api]
 bind="0.0.0.0:8080"
 
