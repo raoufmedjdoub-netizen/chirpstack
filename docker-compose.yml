@@ -1,6 +1,3 @@
-version: "3.8"
-
-services:
   chirpstack:
     image: chirpstack/chirpstack:4
     depends_on:
@@ -12,7 +9,6 @@ services:
     volumes:
       - "./chirpstack:/etc/chirpstack"
     command:
-      - "chirpstack"
       - "--config"
       - "/etc/chirpstack"
     restart: unless-stopped
@@ -26,7 +22,6 @@ services:
     volumes:
       - "./chirpstack-gateway-bridge:/etc/chirpstack-gateway-bridge"
     command:
-      - "chirpstack-gateway-bridge"
       - "--config"
       - "/etc/chirpstack-gateway-bridge"
     restart: unless-stopped
