@@ -1,16 +1,26 @@
 # chirpstack/chirpstack.toml
 
-[api]
-bind="0.0.0.0:8080"
+[logging]
+level = "info"
 
 [postgresql]
-dsn="postgres://chirpstack:change_me_strong@postgres/chirpstack?sslmode=disable"
+dsn = "postgres://chirpstack:change_me_strong@postgres/chirpstack?sslmode=disable"
 
 [redis]
-servers=["redis://redis:6379"]
+servers = ["redis://redis:6379/"]
+cluster = false
 
-[mqtt]
-server="tcp://mosquitto:1883"
+[network]
+net_id = "000000"
+enabled_regions = ["eu868"]
 
-[regions]
-enabled=["EU868"]
+[api]
+bind = "0.0.0.0:8080"
+secret = "uzuMDt2hKI9TEvtYNWxRhzWyHeLrQB6FUpRUhgYW4kw="
+
+[integration]
+enabled = ["mqtt"]
+
+[integration.mqtt]
+server = "tcp://mosquitto:1883"
+json = true
