@@ -1,6 +1,5 @@
 version: "3.8"
 
-services:
   chirpstack:
     image: chirpstack/chirpstack:4
     depends_on:
@@ -10,10 +9,10 @@ services:
     ports:
       - "8080:8080"
     volumes:
-      - "./chirpstack/chirpstack.toml:/etc/chirpstack/chirpstack.toml:ro"
+      - "./chirpstack:/etc/chirpstack"
     command:
       - "--config"
-      - "/etc/chirpstack/chirpstack.toml"
+      - "/etc/chirpstack"
     restart: unless-stopped
     
   gateway-bridge:
