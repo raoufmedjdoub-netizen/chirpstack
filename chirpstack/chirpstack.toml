@@ -1,0 +1,14 @@
+[api]
+bind="0.0.0.0:8080"
+
+[postgresql]
+dsn="postgres://chirpstack:change_me_strong@postgres/chirpstack?sslmode=disable"
+
+[redis]
+servers=["redis://redis:6379"]
+
+[mqtt]
+server="tcp://mosquitto:1883"
+
+[regions]
+enabled=["EU868"]
