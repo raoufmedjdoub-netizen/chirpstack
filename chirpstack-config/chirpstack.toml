@@ -22,14 +22,20 @@ secret = "uzuMDt2hKI9TEvtYNWxRhzWyHeLrQB6FUpRUhgYW4kw="
 enabled = ["mqtt"]
 
 [integration.mqtt]
-server = "tcp://mosquitto:1883"
+server = "tcp://mrc-agrix-chirpstack-server-anjwhl-mosquitto-1:1883"
 json = true
+qos = 0
+clean_session = false
+keep_alive_interval = "30s"
+client_id = "chirpstack-app"
 
-# REQUIRED: Gateway backend (uplinks/downlinks with gateways) uses MQTT
 [gateway]
   [gateway.backend]
     [gateway.backend.mqtt]
-    server = "tcp://mosquitto:1883"
+    server = "tcp://mrc-agrix-chirpstack-server-anjwhl-mosquitto-1:1883"
+    qos = 0
+    clean_session = false
+    client_id = "chirpstack-gw"
     
 # Force gateway backend MQTT (alt syntax for some ChirpStack versions)
 [gateway.backend]
