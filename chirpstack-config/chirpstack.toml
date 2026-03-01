@@ -25,8 +25,15 @@ enabled = ["mqtt"]
 server = "tcp://mosquitto:1883"
 json = true
 
-# ✅ REQUIRED: Gateway backend (uplinks/downlinks with gateways) uses MQTT
+# REQUIRED: Gateway backend (uplinks/downlinks with gateways) uses MQTT
 [gateway]
   [gateway.backend]
     [gateway.backend.mqtt]
     server = "tcp://mosquitto:1883"
+    
+# Force gateway backend MQTT (alt syntax for some ChirpStack versions)
+[gateway.backend]
+type = "mqtt"
+
+[gateway.backend.mqtt]
+server = "tcp://mosquitto:1883"
