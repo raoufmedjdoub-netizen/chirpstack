@@ -24,3 +24,9 @@ enabled = ["mqtt"]
 [integration.mqtt]
 server = "tcp://mosquitto:1883"
 json = true
+
+# ✅ REQUIRED: Gateway backend (uplinks/downlinks with gateways) uses MQTT
+[gateway]
+  [gateway.backend]
+    [gateway.backend.mqtt]
+    server = "tcp://mosquitto:1883"
