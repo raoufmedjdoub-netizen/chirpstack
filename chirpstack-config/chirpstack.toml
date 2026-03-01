@@ -1,4 +1,4 @@
-# chirpstack/chirpstack.toml
+# /etc/chirpstack/chirpstack.toml
 
 [logging]
 level = "info"
@@ -18,28 +18,32 @@ enabled_regions = ["eu868"]
 bind = "0.0.0.0:8080"
 secret = "uzuMDt2hKI9TEvtYNWxRhzWyHeLrQB6FUpRUhgYW4kw="
 
+# ------------------------------------------------------------
+# Application integration (events to your apps) via MQTT
+# ------------------------------------------------------------
 [integration]
 enabled = ["mqtt"]
 
 [integration.mqtt]
-server = "tcp://mrc-agrix-chirpstack-server-anjwhl-mosquitto-1:1883"
+server = "tcp://mosquitto:1883"
 json = true
 qos = 0
 clean_session = false
 keep_alive_interval = "30s"
 client_id = "chirpstack-app"
+# username = "xxxx"      # si auth activée côté mosquitto
+# password = "xxxx"
 
+# ------------------------------------------------------------
+# Gateway backend (uplinks/downlinks with gateways) via MQTT
+# ------------------------------------------------------------
 [gateway]
-  [gateway.backend]
-    [gateway.backend.mqtt]
-    server = "tcp://mrc-agrix-chirpstack-server-anjwhl-mosquitto-1:1883"
-    qos = 0
-    clean_session = false
-    client_id = "chirpstack-gw"
-    
-# Force gateway backend MQTT (alt syntax for some ChirpStack versions)
 [gateway.backend]
-type = "mqtt"
-
 [gateway.backend.mqtt]
 server = "tcp://mosquitto:1883"
+qos = 0
+clean_session = false
+keep_alive_interval = "30s"
+client_id = "chirpstack-gw"
+# username = "xxxx"      # si auth activée côté mosquitto
+# password = "xxxx"
